@@ -1,0 +1,29 @@
+{
+  "name": "swiggy",
+  "version": "1.0.0",
+  "description": "\"A Food Delevery App\"",
+  "scripts": {
+    "test": "jest",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0",
+    "react-redux": "^9.0.4",
+    "react-router-dom": "^6.21.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.11.0",
+    "postcss": "^8.4.33",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.4.1"
+  },
+  "browserlist": [
+    "last 2 version"
+  ]
+}
