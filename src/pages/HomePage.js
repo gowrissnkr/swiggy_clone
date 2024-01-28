@@ -18,7 +18,7 @@ const HomePage = () => {
                         {(!bannerDetails) ? <LoadingSlider /> :
                             <main className="flex w-[100%] h-[100%] flex-col bg-[rgb(255,255,255)] ">
                                 <Banner />
-                                <FoodCategories />
+                                <FoodCategories /> 
                                 <Restaurants />
                             </main>
                         }

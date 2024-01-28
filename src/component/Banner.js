@@ -1,8 +1,18 @@
 import useFetchData from "../hooks/useFetchData";
 import { CDN_URL } from "../constants/constants";
+import { useEffect } from "react";
 
 const Banner = () => {
   const bannerList = useFetchData("topical_banner");
+
+
+  useEffect(() => {
+    
+  })
+
+  if (!bannerList) {
+    return <></>;
+  }
 
   return (
     <div className="bodyWidth">

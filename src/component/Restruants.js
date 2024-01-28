@@ -1,34 +1,43 @@
 import { useSelector } from "react-redux";
 import RestruantCard from "./RestruantCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { findGridElements } from "../utils/findGridELements";
 
 const Restaurants = () => {
   const { restaurantData } = useSelector((store) => store.data);
   const [filterRestrauant, setFilterRestraunt] = useState([]);
-  const { restaurants } =
-    restaurantData[0]?.cards[5]?.card?.card?.gridElements?.infoWithStyle;
+  const [res, setRes] = useState([]);
 
+  useEffect(() => {
+    const restruant = restaurantData[0].cards.filter(
+      (card) => card.card.card.id === "top_brands_for_you"
+    );
+    findGridElements(restruant, "restaurants").then((data) => {
+      console.log(data);
+      setRes(data);
+    });
+  }, [restaurantData]);
 
   const handleClick = (option) => {
-    const filterItems = restaurants.filter((item) => {
+    const filterItems = res.filter((item) => {
       switch (option) {
         case "Ratings 4.0+":
           return item.info.avgRating > 4.0;
         case "Fast delivery":
-            console.log(item.info.sla.deliveryTime )
+          console.log(item.info.sla.deliveryTime);
           return item.info.sla.deliveryTime < 25;
         case "Clear Filters":
-            console.log(restaurants)
-            return restaurants
+          return res;
         default:
           return true;
       }
     });
     setFilterRestraunt((prevState) => (prevState = filterItems));
-    console.log(filterItems)
   };
 
-  const resturant = filterRestrauant.length > 0 ? filterRestrauant : restaurants
+  console.log(res)
+  const resturant = filterRestrauant.length > 0 ? filterRestrauant : res;
+  console.log("resturant :", resturant)
 
   return (
     <>
@@ -43,19 +52,19 @@ const Restaurants = () => {
       </div>
       <div className="container-grid-filter-sort mt-[10px]">
         <div>
-          <div class="sc-kbousE h-[44px] w-[100%]">
-            <div class="sc-dBmzty flex items-center h-[44px] w-[100%] cursor-pointer bg-[rgba(255_255_255)] overflow-hidden">
-              <div class="sc-bDumWk mr-[8px] whitespace-nowrap">
-                <div class="sc-dkmUuB border rounded-[18px] bg-[rgba(255_255_255)] py-[9px] px-[14px] inline-grid w-max grid-flow-col gap-[8px] shadow-[rgba(2_6_12_0.04)_0px_2px] transition-[all_100ms_ease-in_0s]">
-                  <div class="sc-aXZVg font-[600] text-[14px] leading-[18px] text-[rgba(2_6_12_0.75)]">
+          <div className="sc-kbousE h-[44px] w-[100%]">
+            <div className="sc-dBmzty flex items-center h-[44px] w-[100%] cursor-pointer bg-[rgba(255_255_255)] overflow-hidden">
+              <div className="sc-bDumWk mr-[8px] whitespace-nowrap">
+                <div className="sc-dkmUuB border rounded-[18px] bg-[rgba(255_255_255)] py-[9px] px-[14px] inline-grid w-max grid-flow-col gap-[8px] shadow-[rgba(2_6_12_0.04)_0px_2px] transition-[all_100ms_ease-in_0s]">
+                  <div className="sc-aXZVg font-[600] text-[14px] leading-[18px] text-[rgba(2_6_12_0.75)]">
                     Filter
                   </div>
                 </div>
               </div>
-              <div class="sc-bDumWk mr-[8px] whitespace-nowrap">
-                <div class="sc-dkmUuB border rounded-[18px] bg-[rgba(255_255_255)] py-[9px] px-[14px] inline-grid w-max grid-flow-col gap-[8px] shadow-[rgba(2_6_12_0.04)_0px_2px] transition-[all_100ms_ease-in_0s]">
+              <div className="sc-bDumWk mr-[8px] whitespace-nowrap">
+                <div className="sc-dkmUuB border rounded-[18px] bg-[rgba(255_255_255)] py-[9px] px-[14px] inline-grid w-max grid-flow-col gap-[8px] shadow-[rgba(2_6_12_0.04)_0px_2px] transition-[all_100ms_ease-in_0s]">
                   <button
-                    class="sc-aXZVg font-[600] text-[14px] leading-[18px] text-[rgba(2_6_12_0.75)]"
+                    className="sc-aXZVg font-[600] text-[14px] leading-[18px] text-[rgba(2_6_12_0.75)]"
                     onClick={() => {
                       handleClick("Fast delivery");
                     }}
@@ -64,10 +73,10 @@ const Restaurants = () => {
                   </button>
                 </div>
               </div>
-              <div class="sc-bDumWk mr-[8px] whitespace-nowrap">
-                <div class="sc-dkmUuB border rounded-[18px] bg-[rgba(255_255_255)] py-[9px] px-[14px] inline-grid w-max grid-flow-col gap-[8px] shadow-[rgba(2_6_12_0.04)_0px_2px] transition-[all_100ms_ease-in_0s]">
+              <div className="sc-bDumWk mr-[8px] whitespace-nowrap">
+                <div className="sc-dkmUuB border rounded-[18px] bg-[rgba(255_255_255)] py-[9px] px-[14px] inline-grid w-max grid-flow-col gap-[8px] shadow-[rgba(2_6_12_0.04)_0px_2px] transition-[all_100ms_ease-in_0s]">
                   <button
-                    class="sc-aXZVg font-[600] text-[14px] leading-[18px] text-[rgba(2_6_12_0.75)]"
+                    className="sc-aXZVg font-[600] text-[14px] leading-[18px] text-[rgba(2_6_12_0.75)]"
                     onClick={() => {
                       handleClick("Ratings 4.0+");
                     }}
@@ -76,10 +85,10 @@ const Restaurants = () => {
                   </button>
                 </div>
               </div>
-              <div class="sc-bDumWk mr-[8px] whitespace-nowrap">
-                <div class="sc-dkmUuB border rounded-[18px] bg-[rgba(255_255_255)] py-[9px] px-[14px] inline-grid w-max grid-flow-col gap-[8px] shadow-[rgba(2_6_12_0.04)_0px_2px] transition-[all_100ms_ease-in_0s]">
+              <div className="sc-bDumWk mr-[8px] whitespace-nowrap">
+                <div className="sc-dkmUuB border rounded-[18px] bg-[rgba(255_255_255)] py-[9px] px-[14px] inline-grid w-max grid-flow-col gap-[8px] shadow-[rgba(2_6_12_0.04)_0px_2px] transition-[all_100ms_ease-in_0s]">
                   <button
-                    class="sc-aXZVg font-[600] text-[14px] leading-[18px] text-[rgba(2_6_12_0.75)]"
+                    className="sc-aXZVg font-[600] text-[14px] leading-[18px] text-[rgba(2_6_12_0.75)]"
                     onClick={() => {
                       handleClick("Clear Filters");
                     }}

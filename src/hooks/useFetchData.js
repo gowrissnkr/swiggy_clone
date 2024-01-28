@@ -1,22 +1,24 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const useFetchData = (props) => {
-    const bannerDetails = useSelector((state) => state.data?.restaurantData[0])
-    const [data, setData] = useState([]);
+  const bannerDetails = useSelector((state) => state.data?.restaurantData[0]);
+  const [data, setData] = useState([]);
 
-    const fetchData = () => {
-        const filterData = bannerDetails?.cards.filter((item) => {
-            return item.card.card.id === props
-        })
+  const fetchData = () => {
+    const filterData = bannerDetails?.cards.filter((item) => {
+      return item.card.card.id === props;
+    });
 
-        setData(filterData[0].card)
-    };
-    useEffect(() => {
-        fetchData()
-    }, [])
+    if (fetchData) {
+      setData(filterData[0]?.card);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    return data
-}
+  return data;
+};
 
-export default useFetchData
+export default useFetchData;
